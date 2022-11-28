@@ -1,0 +1,194 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ValidateAsset" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_DrTransactionItem" Type="InArgument(sd:DataRow)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>966,3054</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ValidateAsset_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.ComponentModel</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="41">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="ValidateAsset" sap:VirtualizedContainerService.HintSize="559,2989" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="497,101" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start Validate Asset process&quot;]" />
+    <ui:IfElseIf DisplayName="If method not supported" sap:VirtualizedContainerService.HintSize="497,301" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+      <ui:IfElseIf.ConditionBlocks>
+        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+          <ui:IfElseIfBlock BlockType="If" Condition="[NOT in_DrTransactionItem.Item(&quot;Method&quot;).ToString.Equals(&quot;DELETE&quot;) ANDALSO NOT in_DrTransactionItem.Item(&quot;Method&quot;).ToString.Equals(&quot;CREATE&quot;)ANDALSO NOT in_DrTransactionItem.Item(&quot;Method&quot;).ToString.Equals(&quot;EDIT&quot;)]">
+            <ui:IfElseIfBlock.Then>
+              <Throw DisplayName="Throw BRE method not supported" Exception="[New BusinessRuleException(&quot;The supported methods can only be create,delete or edit&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_7" />
+            </ui:IfElseIfBlock.Then>
+          </ui:IfElseIfBlock>
+        </sc:BindingList>
+      </ui:IfElseIf.ConditionBlocks>
+    </ui:IfElseIf>
+    <ui:IfElseIf DisplayName="If asset name is empty" sap:VirtualizedContainerService.HintSize="497,301" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
+      <ui:IfElseIf.ConditionBlocks>
+        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+          <ui:IfElseIfBlock BlockType="If" Condition="[String.IsNullOrEmpty(in_DrTransactionItem.Item(&quot;Asset name&quot;).ToString)]">
+            <ui:IfElseIfBlock.Then>
+              <Throw DisplayName="Throw BRE asset name is empty " Exception="[New BusinessRuleException(&quot;The field named asset name must be populated&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_8" />
+            </ui:IfElseIfBlock.Then>
+          </ui:IfElseIfBlock>
+        </sc:BindingList>
+      </ui:IfElseIf.ConditionBlocks>
+    </ui:IfElseIf>
+    <ui:IfElseIf DisplayName="If value type is empty" sap:VirtualizedContainerService.HintSize="497,301" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
+      <ui:IfElseIf.ConditionBlocks>
+        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+          <ui:IfElseIfBlock BlockType="If" Condition="[String.IsNullOrEmpty(in_DrTransactionItem.Item(&quot;Value type&quot;).ToString)]">
+            <ui:IfElseIfBlock.Then>
+              <Throw DisplayName="Throw BRE value type is empty " Exception="[New BusinessRuleException(&quot;The field named value type must be populated&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_9" />
+            </ui:IfElseIfBlock.Then>
+          </ui:IfElseIfBlock>
+        </sc:BindingList>
+      </ui:IfElseIf.ConditionBlocks>
+    </ui:IfElseIf>
+    <ui:IfElseIf DisplayName="If value type not supported" sap:VirtualizedContainerService.HintSize="497,301" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
+      <ui:IfElseIf.ConditionBlocks>
+        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+          <ui:IfElseIfBlock BlockType="If" Condition="[NOT in_DrTransactionItem.Item(&quot;Value type&quot;).ToString.Equals(&quot;Text&quot;) ANDALSO NOT in_DrTransactionItem.Item(&quot;Value type&quot;).ToString.Equals(&quot;Bool&quot;)ANDALSO NOT in_DrTransactionItem.Item(&quot;Value type&quot;).ToString.Equals(&quot;Integer&quot;)]">
+            <ui:IfElseIfBlock.Then>
+              <Throw DisplayName="Throw BRE value type not supported" Exception="[New BusinessRuleException(&quot;The supported value types can only be text, bool or integer&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_10" />
+            </ui:IfElseIfBlock.Then>
+          </ui:IfElseIfBlock>
+        </sc:BindingList>
+      </ui:IfElseIf.ConditionBlocks>
+    </ui:IfElseIf>
+    <ui:IfElseIf DisplayName="If Folder name blank" sap:VirtualizedContainerService.HintSize="497,301" sap2010:WorkflowViewState.IdRef="IfElseIf_5">
+      <ui:IfElseIf.ConditionBlocks>
+        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+          <ui:IfElseIfBlock BlockType="If" Condition="[String.IsNullOrEmpty(in_DrTransactionItem.Item(&quot;Folder name&quot;).ToString)]">
+            <ui:IfElseIfBlock.Then>
+              <Throw DisplayName="Throw BRE Folder name blank" Exception="[New BusinessRuleException(&quot;The field named folder name must be populated&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_11" />
+            </ui:IfElseIfBlock.Then>
+          </ui:IfElseIfBlock>
+        </sc:BindingList>
+      </ui:IfElseIf.ConditionBlocks>
+    </ui:IfElseIf>
+    <ui:IfElseIf DisplayName="If" sap:VirtualizedContainerService.HintSize="497,301" sap2010:WorkflowViewState.IdRef="IfElseIf_6">
+      <ui:IfElseIf.ConditionBlocks>
+        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+          <ui:IfElseIfBlock BlockType="If" Condition="[String.IsNullOrEmpty(in_DrTransactionItem.Item(&quot;Value&quot;).ToString)]">
+            <ui:IfElseIfBlock.Then>
+              <Throw DisplayName="Throw BRE value is empty " Exception="[New BusinessRuleException(&quot;The field named value must be populated&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_12" />
+            </ui:IfElseIfBlock.Then>
+          </ui:IfElseIfBlock>
+        </sc:BindingList>
+      </ui:IfElseIf.ConditionBlocks>
+    </ui:IfElseIf>
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_DrTransactionItem.Item(&quot;Value type&quot;).ToString.ToUpper]" sap:VirtualizedContainerService.HintSize="497,539" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <ui:IfElseIf x:Key="TEXT" DisplayName="If numeric or boolean" sap:VirtualizedContainerService.HintSize="451,301" sap2010:WorkflowViewState.IdRef="IfElseIf_7">
+        <ui:IfElseIf.ConditionBlocks>
+          <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+            <ui:IfElseIfBlock BlockType="If" Condition="[in_DrTransactionItem.Item(&quot;Value&quot;).ToString.IsNumeric OR in_DrTransactionItem.Item(&quot;Value&quot;).ToString.ToUpper.Equals(&quot;TRUE&quot;) OR in_DrTransactionItem.Item(&quot;Value&quot;).ToString.ToUpper.Equals(&quot;FALSE&quot;)]">
+              <ui:IfElseIfBlock.Then>
+                <Throw DisplayName="Throw BRE value type validation text" Exception="[New BusinessRuleException(&quot;The value &quot;+in_DrTransactionItem.Item(&quot;Value&quot;).ToString+&quot; is not a &quot;+in_DrTransactionItem.Item(&quot;Value type&quot;).ToString+&quot; value type&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_13" />
+              </ui:IfElseIfBlock.Then>
+            </ui:IfElseIfBlock>
+          </sc:BindingList>
+        </ui:IfElseIf.ConditionBlocks>
+      </ui:IfElseIf>
+      <ui:IfElseIf x:Key="BOOL" DisplayName="If not boolean" sap:VirtualizedContainerService.HintSize="451,301" sap2010:WorkflowViewState.IdRef="IfElseIf_8">
+        <ui:IfElseIf.ConditionBlocks>
+          <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+            <ui:IfElseIfBlock BlockType="If" Condition="[NOT in_DrTransactionItem.Item(&quot;Value&quot;).ToString.ToUpper.Equals(&quot;FALSE&quot;) ANDALSO NOT in_DrTransactionItem.Item(&quot;Value&quot;).ToString.ToUpper.Equals(&quot;TRUE&quot;)]">
+              <ui:IfElseIfBlock.Then>
+                <Throw DisplayName="Throw BRE value type validation boolean" Exception="[New BusinessRuleException(&quot;The value &quot;+in_DrTransactionItem.Item(&quot;Value&quot;).ToString+&quot; is not a &quot;+in_DrTransactionItem.Item(&quot;Value type&quot;).ToString+&quot; value type&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_14" />
+              </ui:IfElseIfBlock.Then>
+            </ui:IfElseIfBlock>
+          </sc:BindingList>
+        </ui:IfElseIf.ConditionBlocks>
+      </ui:IfElseIf>
+      <ui:IfElseIf x:Key="INTEGER" DisplayName="If NOT numeric " sap:VirtualizedContainerService.HintSize="451,301" sap2010:WorkflowViewState.IdRef="IfElseIf_9">
+        <ui:IfElseIf.ConditionBlocks>
+          <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+            <ui:IfElseIfBlock BlockType="If" Condition="[NOT in_DrTransactionItem.Item(&quot;Value&quot;).ToString.IsNumeric]">
+              <ui:IfElseIfBlock.Then>
+                <Throw DisplayName="Throw BRE value type validation integer" Exception="[New BusinessRuleException(&quot;The value &quot;+in_DrTransactionItem.Item(&quot;Value&quot;).ToString+&quot; is not a &quot;+in_DrTransactionItem.Item(&quot;Value type&quot;).ToString+&quot; value type&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_15" />
+              </ui:IfElseIfBlock.Then>
+            </ui:IfElseIfBlock>
+          </sc:BindingList>
+        </ui:IfElseIf.ConditionBlocks>
+      </ui:IfElseIf>
+    </Switch>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="497,101" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;End Validate Asset process&quot;]" />
+  </Sequence>
+</Activity>
