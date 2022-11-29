@@ -1,13 +1,13 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Misc_Create_Transaction_Data" this:Misc_Create_Transaction_Data.in_DtAssets="[Nothing]" this:Misc_Create_Transaction_Data.in_DtQueues="[Nothing]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Misc_Create_Transaction_Data" this:Misc_Create_Transaction_Data.in_dt_Assets="[Nothing]" this:Misc_Create_Transaction_Data.in_dt_Queues="[Nothing]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_DtAssets" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="in_DtQueues" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="out_DtTransactionData" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_dt_Assets" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_dt_Queues" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_TransactionData" Type="OutArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>969,3976</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1553.3333333333333,3552</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Misc_Create_Transaction_Data_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="56">
@@ -89,7 +89,7 @@
       <AssemblyReference>System.Collections</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Misc_Create_Transaction_Data" sap:VirtualizedContainerService.HintSize="979,3911" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Misc_Create_Transaction_Data" sap:VirtualizedContainerService.HintSize="959.3333333333334,3487.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Boolean" Name="RowNew" />
       <Variable x:TypeArguments="x:Int32" Name="RowIndex" />
@@ -100,15 +100,15 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="917,101" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;--Start Create transaction Data on Misc--&quot;]" />
-    <ui:BuildDataTable DataTable="[Out_DtTransactionData]" DisplayName="Transaction Data" sap:VirtualizedContainerService.HintSize="917,69" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Type&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Method&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Folder_x0020_name&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Environment&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Orchestrator_x0020_type&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Asset_x0020_name&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Value_x0020_type&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Value&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Queue_x0020_name&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Max_x0020_number_x0020_of_x0020_retries&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Description&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="917.3333333333334,94.66666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;--Start Create transaction Data on Misc--&quot;]" />
+    <ui:BuildDataTable DataTable="[out_dt_TransactionData]" DisplayName="Transaction Data" sap:VirtualizedContainerService.HintSize="917.3333333333334,58.666666666666664" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Method&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Folder_x0020_name&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Environment&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Orchestrator_x0020_type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Asset_x0020_name&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Value_x0020_type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Value&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Queue_x0020_name&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Max_x0020_number_x0020_of_x0020_retries&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Description&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:BuildDataTable>
-    <Assign DisplayName="Assign row new from datatable true queues" sap:VirtualizedContainerService.HintSize="917,70" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="Assign row new from datatable true queues" sap:VirtualizedContainerService.HintSize="917.3333333333334,62" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Boolean">[RowNew]</OutArgument>
       </Assign.To>
@@ -116,64 +116,99 @@
         <InArgument x:TypeArguments="x:Boolean">True</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each coloumns in queues datatable" sap:VirtualizedContainerService.HintSize="917,1349" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_DtQueues.Columns]">
+    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each coloumns in queues datatable" sap:VirtualizedContainerService.HintSize="917.3333333333334,1012" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_dt_Queues.Columns]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="x:Object" Name="Queues" />
+            <DelegateInArgument x:TypeArguments="x:Object" Name="Queue" />
           </ActivityAction.Argument>
-          <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="696,1215" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[out_DtTransactionData.Columns]">
+          <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="708.6666666666666,884" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[out_dt_TransactionData.Columns]">
             <ui:ForEach.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="TranData" />
                 </ActivityAction.Argument>
-                <ui:IfElseIf DisplayName="if columns are the same queues" sap:VirtualizedContainerService.HintSize="660,1081" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+                <ui:IfElseIf DisplayName="if columns are the same queues" sap:VirtualizedContainerService.HintSize="672,756" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
                   <ui:IfElseIf.ConditionBlocks>
                     <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-                      <ui:IfElseIfBlock BlockType="If" Condition="[TranData.ToString.Equals(Queues.ToString)]">
+                      <ui:IfElseIfBlock BlockType="If" Condition="[TranData.ToString.Equals(Queue.ToString)]">
                         <ui:IfElseIfBlock.Then>
-                          <Sequence DisplayName="Sequence populate transaction data queues items" sap:VirtualizedContainerService.HintSize="609,877" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                          <Sequence sap:VirtualizedContainerService.HintSize="476,556" sap2010:WorkflowViewState.IdRef="Sequence_9">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[RowIndex]" DataTable="[in_DtQueues]" DisplayName="For Each Row in queues" sap:VirtualizedContainerService.HintSize="547,755" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[RowIndex]" DataTable="[in_dt_Queues]" DisplayName="For Each Row in queues" sap:VirtualizedContainerService.HintSize="434,362" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
                               <ui:ForEachRow.Body>
                                 <ActivityAction x:TypeArguments="sd:DataRow">
                                   <ActivityAction.Argument>
                                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
                                   </ActivityAction.Argument>
-                                  <Sequence DisplayName="Sequence populte transaction data queues" sap:VirtualizedContainerService.HintSize="513,631" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                                  <Sequence DisplayName="Sequence populte transaction data queues" sap:VirtualizedContainerService.HintSize="304,246.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_7">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <ui:IfElseIf DisplayName="If Datarow New true queue" sap:VirtualizedContainerService.HintSize="451,399" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
+                                    <ui:IfElseIf DisplayName="If Datarow New true queue" sap:VirtualizedContainerService.HintSize="262,52.666666666666664" sap2010:WorkflowViewState.IdRef="IfElseIf_5">
                                       <ui:IfElseIf.ConditionBlocks>
                                         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                                           <ui:IfElseIfBlock BlockType="If" Condition="[RowNew]">
                                             <ui:IfElseIfBlock.Then>
-                                              <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[out_DtTransactionData.NewRow]" DataTable="[out_DtTransactionData]" DisplayName="Add blank Data Row in transaction data queue" sap:VirtualizedContainerService.HintSize="334,195" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                                              <Sequence sap:VirtualizedContainerService.HintSize="376,408.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,86.66666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Data: &quot; + CurrentRow(0).ToString]" />
+                                                <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[out_dt_TransactionData.NewRow]" DataTable="[out_dt_TransactionData]" DisplayName="Add blank Data Row in transaction data queue" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="AddDataRow_3">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </ui:AddDataRow>
+                                              </Sequence>
                                             </ui:IfElseIfBlock.Then>
                                           </ui:IfElseIfBlock>
                                         </sc:BindingList>
                                       </ui:IfElseIf.ConditionBlocks>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
                                     </ui:IfElseIf>
-                                    <Assign DisplayName="Assign DataRow new false queue" sap:VirtualizedContainerService.HintSize="451,70" sap2010:WorkflowViewState.IdRef="Assign_2">
+                                    <Assign DisplayName="Assign queue row" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_10">
                                       <Assign.To>
-                                        <OutArgument x:TypeArguments="x:Boolean">[RowNew]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:Object">[out_dt_TransactionData.Rows(rowindex).item(TranData.ToString)]</OutArgument>
                                       </Assign.To>
                                       <Assign.Value>
-                                        <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                        <InArgument x:TypeArguments="x:Object">[Currentrow.Item(TranData.ToString).ToString]</InArgument>
                                       </Assign.Value>
                                     </Assign>
                                   </Sequence>
                                 </ActivityAction>
                               </ui:ForEachRow.Body>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
                             </ui:ForEachRow>
+                            <Assign DisplayName="Assign DataRow new false queue" sap:VirtualizedContainerService.HintSize="434,62" sap2010:WorkflowViewState.IdRef="Assign_9">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Boolean">[RowNew]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                              </Assign.Value>
+                            </Assign>
                           </Sequence>
                         </ui:IfElseIfBlock.Then>
                       </ui:IfElseIfBlock>
@@ -192,7 +227,7 @@
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
-    <Assign DisplayName="Assign DataRow new true asset" sap:VirtualizedContainerService.HintSize="917,70" sap2010:WorkflowViewState.IdRef="Assign_4">
+    <Assign DisplayName="Assign DataRow new true asset" sap:VirtualizedContainerService.HintSize="917.3333333333334,62" sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Boolean">[RowNew]</OutArgument>
       </Assign.To>
@@ -200,27 +235,27 @@
         <InArgument x:TypeArguments="x:Boolean">True</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign # of rows in the data table " sap:VirtualizedContainerService.HintSize="917,70" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign DisplayName="Assign # of rows in the data table " sap:VirtualizedContainerService.HintSize="917.3333333333334,62" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Int32">[RowTrankingIndex]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:Int32">[out_DtTransactionData.Rows.Count]</InArgument>
+        <InArgument x:TypeArguments="x:Int32">[out_dt_TransactionData.Rows.Count]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each col in assets dt" sap:VirtualizedContainerService.HintSize="917,1679" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[in_DtAssets.Columns]">
+    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each col in assets dt" sap:VirtualizedContainerService.HintSize="917.3333333333334,1662.6666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[in_dt_Assets.Columns]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="Asset" />
           </ActivityAction.Argument>
-          <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each column un transaction data" sap:VirtualizedContainerService.HintSize="881,1545" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[out_DtTransactionData.Columns]">
+          <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each column un transaction data" sap:VirtualizedContainerService.HintSize="697.3333333333334,1534.6666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[out_dt_TransactionData.Columns]">
             <ui:ForEach.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="TranData" />
                 </ActivityAction.Argument>
-                <ui:IfElseIf DisplayName="If columns are the same" sap:VirtualizedContainerService.HintSize="845,1411" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
+                <ui:IfElseIf DisplayName="If columns are the same" sap:VirtualizedContainerService.HintSize="660.6666666666666,1406.6666666666667" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
                   <ui:IfElseIf.ConditionBlocks>
                     <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                       <ui:IfElseIfBlock BlockType="If" Condition="[TranData.ToString.Equals(Asset.ToString)]">
@@ -239,7 +274,7 @@
                                 <InArgument x:TypeArguments="x:Int32">[RowTrankingIndex]</InArgument>
                               </Assign.Value>
                             </Assign>
-                            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[in_DtAssets]" DisplayName="For Each Row in assets" sap:VirtualizedContainerService.HintSize="547,865" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+                            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[in_dt_Assets]" DisplayName="For Each Row in assets" sap:VirtualizedContainerService.HintSize="547,865" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
                               <ui:ForEachRow.Body>
                                 <ActivityAction x:TypeArguments="sd:DataRow">
                                   <ActivityAction.Argument>
@@ -256,7 +291,7 @@
                                         <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                                           <ui:IfElseIfBlock BlockType="If" Condition="[RowNew]">
                                             <ui:IfElseIfBlock.Then>
-                                              <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[out_DtTransactionData.NewRow]" DataTable="[out_DtTransactionData]" DisplayName="Add blank Data Row in transaction data" sap:VirtualizedContainerService.HintSize="334,195" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+                                              <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[out_dt_TransactionData.NewRow]" DataTable="[out_dt_TransactionData]" DisplayName="Add blank Data Row in transaction data" sap:VirtualizedContainerService.HintSize="334,195" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
                                             </ui:IfElseIfBlock.Then>
                                           </ui:IfElseIfBlock>
                                         </sc:BindingList>
@@ -270,7 +305,7 @@
                                     </ui:IfElseIf>
                                     <Assign DisplayName="Assign asset row" sap:VirtualizedContainerService.HintSize="451,70" sap2010:WorkflowViewState.IdRef="Assign_6">
                                       <Assign.To>
-                                        <OutArgument x:TypeArguments="x:Object">[out_DtTransactionData.Rows(RowIndex).item(TranData.ToString)]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:Object">[out_dt_TransactionData.Rows(RowIndex).item(TranData.ToString)]</OutArgument>
                                       </Assign.To>
                                       <Assign.Value>
                                         <InArgument x:TypeArguments="x:Object">[row.Item(TranData.ToString).ToString]</InArgument>

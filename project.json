@@ -1,6 +1,6 @@
 {
-  "name": "VM-Ware_QueuesAndAssets",
-  "description": "VM ware assets and queues",
+  "name": "CICD-AssetsAndQueues",
+  "description": "CICD assets and queues",
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.16.0]",

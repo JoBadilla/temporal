@@ -1,18 +1,16 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_DefinitionFilePath="C:\Users\jobadilla\OneDrive - Auxis, LLC\Documents\UiPath\VM-Ware_QueuesAndAssets\Data\Input" this:Main.in_OrchType="ON PREMISE" this:Main.in_OrchEnvironment="DEV" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_DefinitionFilePath="[environment.CurrentDirectory + &quot;\Data\Input\AssetQueueDefinition.xlsx&quot;]" this:Main.in_OrchType="ON PREMISE" this:Main.in_OrchEnvironment="DEV" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_DefinitionFilePath" Type="InArgument(x:String)" />
     <x:Property Name="in_OrchType" Type="InArgument(x:String)" />
     <x:Property Name="in_OrchEnvironment" Type="InArgument(x:String)" />
-    <x:Property Name="in_DtParameters" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="io_DrTransactionItem" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>813,2633</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1554,3588</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <sco:Collection x:TypeArguments="x:String">
+    <scg:List x:TypeArguments="x:String" Capacity="35">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -45,10 +43,13 @@
       <x:String>System.Reflection</x:String>
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Xml.Serialization</x:String>
-    </sco:Collection>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+    </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="52">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="49">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -94,15 +95,25 @@
       <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
       <AssemblyReference>System.Private.Xml</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="VM-Ware bot&#xA;-This is a lineal process to get and manipulate the assets and queues on Orchestrator,  like a lineal process with global values.&#xA;" DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="586,2568" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Assets and Queues&#xA;-This is a lineal process to get and manipulate the assets and queues on Orchestrator,  like a lineal process with global values.&#xA;" DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="692,3523" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="sd:DataTable" Name="DtParameters" />
-      <Variable x:TypeArguments="sd:DataTable" Name="DtAssets" />
-      <Variable x:TypeArguments="sd:DataTable" Name="DtQueues" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Parameters" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Assets" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Queues" />
       <Variable x:TypeArguments="sd:DataRow" Name="DrTransactionItem" />
-      <Variable x:TypeArguments="sd:DataTable" Default="[New DataTable()]" Name="TransactionData" />
+      <Variable x:TypeArguments="sd:DataTable" Default="[New DataTable()]" Name="dt_TransactionData" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_ItemParameters" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_AllAssets" />
+      <Variable x:TypeArguments="x:String" Name="ItemID" />
+      <Variable x:TypeArguments="x:String" Name="ItemFolderID" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_AllFolders" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="Config" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -110,113 +121,442 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap2010:Annotation.AnnotationText="This sequence &quot;Start&quot; the process:&#xA;&#xA;-&gt;connect with the Orch.&#xA;-&gt;search the files inside Data's folder to validate information.&#xA;-&gt;Get access to assets and queues." DisplayName="init" sap:VirtualizedContainerService.HintSize="524,796" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence sap2010:Annotation.AnnotationText="This sequence &quot;Start&quot; the process:&#xA;&#xA;-&gt;connect with the Orch.&#xA;-&gt;search the files inside Data's folder to validate information.&#xA;-&gt;Get access to assets and queues." DisplayName="init" sap:VirtualizedContainerService.HintSize="650,1033" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;--Start Init--&quot;]" />
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\Misc_Read Input File.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Misc\Misc_Read Input File.xaml">
+      <ui:LogMessage DisplayName="Log Message - Start" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;--Start Init--&quot;]" />
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\InitAllSettings.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Misc\InitAllSettings.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtParameters">[DtParameters]</OutArgument>
-          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtAssets">[DtAssets]</OutArgument>
-          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtQueues">[DtQueues]</OutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_ConfigFile">Data\Config.xlsx</InArgument>
+          <InArgument x:TypeArguments="s:String[]" x:Key="in_ConfigSheets">[{"Settings","Constants"}]</InArgument>
+          <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Config">[Config]</OutArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\Misc_Read Input File.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Misc\Misc_Read Input File.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtParameters">[dt_Parameters]</OutArgument>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtAssets">[dt_Assets]</OutArgument>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtQueues">[dt_Queues]</OutArgument>
           <InArgument x:TypeArguments="x:String" x:Key="in_DefinitionFilePath">[in_DefinitionFilePath]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\Misc_Create Transaction Data.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Misc\Misc_Create Transaction Data.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\Misc_Create Transaction Data.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Misc\Misc_Create Transaction Data.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtTransactionData">[TransactionData]</OutArgument>
-          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtAssets">[DtAssets]</InArgument>
-          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtQueues">[DtQueues]</InArgument>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_Assets">[dt_assets]</InArgument>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_Queues">[dt_Queues]</InArgument>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_TransactionData">[dt_TransactionData]</OutArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\Misc_Filter Transaction Data.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Misc\Misc_Filter Transaction Data.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\Misc_Filter Transaction Data.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Misc\Misc_Filter Transaction Data.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtFilteredTransactionData">[TransactionData]</OutArgument>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtFilteredTransactionData">[dt_TransactionData]</OutArgument>
           <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorType">[in_OrchType]</InArgument>
           <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorEnvironment">[in_OrchEnvironment]</InArgument>
-          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtTransactionD">[TransactionData]</InArgument>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtTransactionD">[dt_TransactionData]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
+      <ui:WriteRange AddHeaders="True" DataTable="[dt_TransactionData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" WorkbookPath="Transaction Data.xlsx">
+        <ui:WriteRange.StartingCell>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </ui:WriteRange.StartingCell>
+      </ui:WriteRange>
     </Sequence>
-    <Sequence sap2010:Annotation.AnnotationText="This sequences is where all logic process will run.&#xA;&#xA;-&gt;Assets validations.&#xA;-&gt;Queues validations.&#xA;-&gt;Manage the Miscellaneuos.&#xA;-&gt;Manage the transactions.&#xA;-&gt;Manage all the process on background while is connect with Orch." DisplayName="Main Process" sap:VirtualizedContainerService.HintSize="524,1538" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence sap2010:Annotation.AnnotationText="This sequences is where all logic process will run.&#xA;&#xA;-&gt;Assets validations.&#xA;-&gt;Queues validations.&#xA;-&gt;Manage the Miscellaneuos.&#xA;-&gt;Manage the transactions.&#xA;-&gt;Manage all the process on background while is connect with Orch." DisplayName="Main Process" sap:VirtualizedContainerService.HintSize="650,2286" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="462,101" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;--Start Process--&quot;]" />
-      <Sequence DisplayName="Pre-Main Functions" sap:VirtualizedContainerService.HintSize="462,730" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="608,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;--Start Process--&quot;]" />
+      <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_TransactionData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="608,1636" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+        <ui:ForEachRow.Body>
+          <ActivityAction x:TypeArguments="sd:DataRow">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Pre-Main Functions" sap:VirtualizedContainerService.HintSize="616,2322" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="orchestrator_Cookie" />
+                <Variable x:TypeArguments="sd:DataTable" Name="dt_ExtractedAssets" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="574,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Processing: &quot; + IF(CurrentRow(&quot;Asset name&quot;).ToString.Equals(&quot;&quot;), CurrentRow(&quot;Queue name&quot;).ToString, CurrentRow(&quot;Asset name&quot;).ToString)]" />
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\OrchAPI_ValidateParameters.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="574,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="OrchAPI\OrchAPI_ValidateParameters.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtParameters">[dt_Parameters]</InArgument>
+                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtItemParameters" />
+                  <InArgument x:TypeArguments="sd:DataRow" x:Key="in_DrTransactionItem">[currentRow]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="574,84" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Wait HERE&quot;]" />
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\OrchAPI_Login.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="574,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="OrchAPI\OrchAPI_Login.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <OutArgument x:TypeArguments="x:String" x:Key="out_OrchestratorCookie">[orchestrator_Cookie]</OutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_CloudLoginScope">[Config("cloudLogin_Scope").ToString]</InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_ItemParameters">[dt_ItemParameters]</InArgument>
+                  <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_dr_TransactionItem">[CurrentRow]</InOutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\OrchAPI_GetAllFolders.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="574,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="OrchAPI\OrchAPI_GetAllFolders.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorCookie">[orchestrator_Cookie]</InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_ItemParameters">[dt_ItemParameters]</InArgument>
+                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_AllFolders">[dt_AllFolders]</OutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\Misc_Get Item ID.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="574,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Misc\Misc_Get Item ID.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_ItemToSearch">[CurrentRow("Folder name").ToString]</InArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="out_ItemID">[ItemFolderID]</OutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_ColumnNameToSearch">Folder Name</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_ColumnNameToOutput">Folder ID</InArgument>
+                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_ToSearch">[dt_AllFolders]</OutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <If Condition="[CurrentRow.item(&quot;Type&quot;).ToString.Equals(&quot;ASSET&quot;)]" DisplayName="If - Assets" sap:VirtualizedContainerService.HintSize="574,51" sap2010:WorkflowViewState.IdRef="If_1">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If.Then>
+                  <Sequence sap:VirtualizedContainerService.HintSize="376,426" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:LogMessage DisplayName="Log Message name asset" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Asset name is &quot;+CurrentRow.item(&quot;Asset name&quot;).ToString]">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:LogMessage>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\Assets\ValidateAsset.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="OrchAPI\Assets\ValidateAsset.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="sd:DataRow" x:Key="in_DrTransactionItem">[CurrentRow]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <Switch x:TypeArguments="x:String" DisplayName="Switch - Create EDIT DELETE Asset" Expression="[CurrentRow.item(&quot;Method&quot;).ToString.ToUpper]" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="Switch`1_3">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="CREATE" DisplayName="OrchAPI\Assets\CreateAsset.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="OrchAPI\Assets\CreateAsset.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtItemParameters">
+                            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_ItemParameters" />
+                          </InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_OrchCookie">
+                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="orchestrator_Cookie" />
+                          </InArgument>
+                          <InArgument x:TypeArguments="sd:DataRow" x:Key="in_DrTransactionItem">
+                            <VisualBasicValue x:TypeArguments="sd:DataRow" ExpressionText="CurrentRow" />
+                          </InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_FolderID">
+                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ItemFolderID" />
+                          </InArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
+                      <Sequence x:Key="EDIT" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\Assets\GetAllAssets.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="OrchAPI\Assets\GetAllAssets.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtAllAssets">
+                              <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_ExtractedAssets" />
+                            </OutArgument>
+                            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtItemParameters">
+                              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_ItemParameters" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_OrchCookie">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="orchestrator_Cookie" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_FolderID">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ItemFolderID" />
+                            </InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\Misc_Get Item ID.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Misc\Misc_Get Item ID.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ItemToSearch">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="CurrentRow(&quot;Asset name&quot;).ToString" />
+                            </InArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="out_ItemID">
+                              <VisualBasicReference x:TypeArguments="x:String" ExpressionText="ItemID" />
+                            </OutArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ColumnNameToSearch">
+                              <Literal x:TypeArguments="x:String">Asset Name</Literal>
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ColumnNameToOutput">
+                              <Literal x:TypeArguments="x:String">Asset ID</Literal>
+                            </InArgument>
+                            <OutArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_ToSearch">
+                              <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_ExtractedAssets" />
+                            </OutArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\Assets\EditAsset.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="OrchAPI\Assets\EditAsset.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_ItemParameters">
+                              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_Parameters" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_orchestrator_Cookie">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="orchestrator_Cookie" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_Folder_ID">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ItemFolderID" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_asset_ID">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ItemID" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="sd:DataRow" x:Key="in_dr_TransactionItem">
+                              <VisualBasicValue x:TypeArguments="sd:DataRow" ExpressionText="CurrentRow" />
+                            </InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                      </Sequence>
+                      <Sequence x:Key="DELETE" sap:VirtualizedContainerService.HintSize="376,508" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\Assets\GetAllAssets.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="OrchAPI\Assets\GetAllAssets.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtAllAssets">
+                              <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_ExtractedAssets" />
+                            </OutArgument>
+                            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtItemParameters">
+                              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_ItemParameters" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_OrchCookie">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="orchestrator_Cookie" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_FolderID">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ItemFolderID" />
+                            </InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\Misc_Get Item ID.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="Misc\Misc_Get Item ID.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ItemToSearch">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="CurrentRow(&quot;Asset name&quot;).ToString" />
+                            </InArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="out_ItemID">
+                              <VisualBasicReference x:TypeArguments="x:String" ExpressionText="ItemID" />
+                            </OutArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ColumnNameToSearch">
+                              <Literal x:TypeArguments="x:String">Asset Name</Literal>
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ColumnNameToOutput">
+                              <Literal x:TypeArguments="x:String">Asset ID</Literal>
+                            </InArgument>
+                            <OutArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_ToSearch">
+                              <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_ExtractedAssets" />
+                            </OutArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\Assets\DeleteAsset.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="OrchAPI\Assets\DeleteAsset.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtItemParameters">
+                              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_ItemParameters" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_OrchCookie">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="orchestrator_Cookie" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_FolderID">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ItemFolderID" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="sd:DataRow" x:Key="in_DrTransactionItem">
+                              <VisualBasicValue x:TypeArguments="sd:DataRow" ExpressionText="CurrentRow" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_AssetID">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ItemID" />
+                            </InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                      </Sequence>
+                    </Switch>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_9">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Sequence>
+                </If.Else>
+              </If>
+              <If Condition="[CurrentRow.item(&quot;Type&quot;).ToString.Equals(&quot;QUEUE&quot;)]" DisplayName="If - Queues" sap:VirtualizedContainerService.HintSize="574,1276" sap2010:WorkflowViewState.IdRef="If_2">
+                <If.Then>
+                  <Sequence sap:VirtualizedContainerService.HintSize="538,1089" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:LogMessage DisplayName="Log Message name" sap:VirtualizedContainerService.HintSize="496,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Queue name is &quot;+CurrentRow.item(&quot;Queue name&quot;).ToString]">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:LogMessage>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\Queues\ValidateQueue.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="496,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="OrchAPI\Queues\ValidateQueue.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="sd:DataRow" x:Key="in_DrTransactionItem">
+                          <VisualBasicValue x:TypeArguments="sd:DataRow" ExpressionText="CurrentRow" />
+                        </InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <Switch x:TypeArguments="x:String" DisplayName="Switch - Create DELETE Asset" Expression="[CurrentRow.item(&quot;Method&quot;).ToString.ToUpper]" sap:VirtualizedContainerService.HintSize="496,714" sap2010:WorkflowViewState.IdRef="Switch`1_5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="CREATE" DisplayName="OrchAPI\Queues\CreateQueue.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="OrchAPI\Queues\CreateQueue.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtItemParameters">
+                            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_ItemParameters" />
+                          </InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_FolderID">
+                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ItemFolderID" />
+                          </InArgument>
+                          <InArgument x:TypeArguments="sd:DataRow" x:Key="in_DrTransactionItem">
+                            <VisualBasicValue x:TypeArguments="sd:DataRow" ExpressionText="CurrentRow" />
+                          </InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorCookie">
+                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="orchestrator_Cookie" />
+                          </InArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
+                      <Sequence x:Key="DELETE" sap:VirtualizedContainerService.HintSize="376,508" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="sd:DataTable" Name="dt_ExtractedQueues" />
+                        </Sequence.Variables>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\Queues\GetAllQueues.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="OrchAPI\Queues\GetAllQueues.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtItemParameters">
+                              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_ItemParameters" />
+                            </InArgument>
+                            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtAllQueues">
+                              <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_ExtractedQueues" />
+                            </OutArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorCookie">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="orchestrator_Cookie" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_FolderID">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ItemFolderID" />
+                            </InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\Misc_Get Item ID.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="Misc\Misc_Get Item ID.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ItemToSearch">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="CurrentRow(&quot;Queue name&quot;).ToString" />
+                            </InArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="out_ItemID">
+                              <VisualBasicReference x:TypeArguments="x:String" ExpressionText="ItemID" />
+                            </OutArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ColumnNameToSearch">
+                              <Literal x:TypeArguments="x:String">Queue Name</Literal>
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ColumnNameToOutput">
+                              <Literal x:TypeArguments="x:String">Queue ID</Literal>
+                            </InArgument>
+                            <OutArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_ToSearch">
+                              <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_ExtractedQueues" />
+                            </OutArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\Queues\DeleteQueue.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="OrchAPI\Queues\DeleteQueue.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtItemParameters">
+                              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_ItemParameters" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorCookie">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="orchestrator_Cookie" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_FolderID">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ItemFolderID" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="sd:DataRow" x:Key="in_DrTransactionItem">
+                              <VisualBasicValue x:TypeArguments="sd:DataRow" ExpressionText="CurrentRow" />
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_QueueID">
+                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ItemID" />
+                            </InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                      </Sequence>
+                    </Switch>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_11">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Sequence>
+                </If.Else>
+              </If>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEachRow.Body>
+      </ui:ForEachRow>
+      <Sequence DisplayName="Orchestrator API Functions" sap:VirtualizedContainerService.HintSize="608,270" sap2010:WorkflowViewState.IdRef="Sequence_5">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\OrchAPI_ValidateParameters.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="352,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="OrchAPI\OrchAPI_ValidateParameters.xaml">
-          <ui:InvokeWorkflowFile.Arguments>
-            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtParameters" />
-            <InArgument x:TypeArguments="sd:DataRow" x:Key="in_DrTransactionItem" />
-            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtItemParameters" />
-          </ui:InvokeWorkflowFile.Arguments>
-        </ui:InvokeWorkflowFile>
-        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\OrchAPI_Login.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="352,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="OrchAPI\OrchAPI_Login.xaml">
-          <ui:InvokeWorkflowFile.Arguments>
-            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtItemParameters">
-              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="Nothing" />
-            </InArgument>
-            <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_DrTransactionItem" />
-            <OutArgument x:TypeArguments="x:String" x:Key="out_OrchestratorCookie" />
-            <InArgument x:TypeArguments="x:String" x:Key="in_CloudLoginScope">
-              <Literal x:TypeArguments="x:String" Value="" />
-            </InArgument>
-          </ui:InvokeWorkflowFile.Arguments>
-        </ui:InvokeWorkflowFile>
-        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="OrchAPI\OrchAPI_GetAllFolders.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="352,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="OrchAPI\OrchAPI_GetAllFolders.xaml">
-          <ui:InvokeWorkflowFile.Arguments>
-            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtItemParameters" />
-            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtAllFolders" />
-            <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorCookie" />
-          </ui:InvokeWorkflowFile.Arguments>
-        </ui:InvokeWorkflowFile>
-        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Misc\Misc_Get Item ID.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="352,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Misc\Misc_Get Item ID.xaml">
-          <ui:InvokeWorkflowFile.Arguments>
-            <OutArgument x:TypeArguments="sd:DataTable" x:Key="in_DtToSearch" />
-            <InArgument x:TypeArguments="x:String" x:Key="in_ItemToSearch">
-              <Literal x:TypeArguments="x:String" Value="" />
-            </InArgument>
-            <OutArgument x:TypeArguments="x:String" x:Key="out_ItemID" />
-            <InArgument x:TypeArguments="x:String" x:Key="in_ColumnNameToSearch">
-              <Literal x:TypeArguments="x:String" Value="" />
-            </InArgument>
-            <InArgument x:TypeArguments="x:String" x:Key="in_ColumnNameToOutput">
-              <Literal x:TypeArguments="x:String" Value="" />
-            </InArgument>
-          </ui:InvokeWorkflowFile.Arguments>
-        </ui:InvokeWorkflowFile>
-      </Sequence>
-      <Sequence DisplayName="Orchestrator API Functions" sap:VirtualizedContainerService.HintSize="462,388" sap2010:WorkflowViewState.IdRef="Sequence_5">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-        <Sequence DisplayName="Assets" sap:VirtualizedContainerService.HintSize="400,113" sap2010:WorkflowViewState.IdRef="Sequence_7">
+        <Sequence DisplayName="Assets" sap:VirtualizedContainerService.HintSize="200,69.33333333333333" sap2010:WorkflowViewState.IdRef="Sequence_7">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </Sequence>
-        <Sequence DisplayName="Queues" sap:VirtualizedContainerService.HintSize="400,113" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence DisplayName="Queues" sap:VirtualizedContainerService.HintSize="200,69.33333333333333" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </Sequence>

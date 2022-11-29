@@ -1,13 +1,13 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="OrchAPI_ValidateParameters" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="OrchAPI_ValidateParameters" this:OrchAPI_ValidateParameters.in_DtParameters="[Nothing]" this:OrchAPI_ValidateParameters.in_DrTransactionItem="[Nothing]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_DtParameters" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="in_DrTransactionItem" Type="InArgument(sd:DataRow)" />
     <x:Property Name="out_DtItemParameters" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_DrTransactionItem" Type="InArgument(sd:DataRow)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>744,2413</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1553.3333333333333,1994.6666666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>OrchAPI_ValidateParameters_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -42,7 +42,7 @@
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="39">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="78">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
@@ -81,176 +81,240 @@
       <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
       <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="OrchAPI_ValidateParameters" sap:VirtualizedContainerService.HintSize="496,2348" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="OrchAPI_ValidateParameters" sap:VirtualizedContainerService.HintSize="556.6666666666666,1930" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,101" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;--Start Validation Parameters on Orch--&quot;]" />
-    <ui:FilterDataTable DataTable="[in_DtParameters]" DisplayName="Filter Data Table parameters" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="434,170" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[out_DtItemParameters]" SelectColumnsMode="Keep">
-      <ui:FilterDataTable.Filters>
-        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
-          <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-            <ui:FilterOperationArgument.Column>
-              <InArgument x:TypeArguments="x:String">["Orchestrator type"]</InArgument>
-            </ui:FilterOperationArgument.Column>
-            <ui:FilterOperationArgument.Operand>
-              <InArgument x:TypeArguments="x:String">[in_DrTransactionItem.item("Orchestrator type").ToString]</InArgument>
-            </ui:FilterOperationArgument.Operand>
-          </ui:FilterOperationArgument>
-          <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
-            <ui:FilterOperationArgument.Column>
-              <InArgument x:TypeArguments="x:String">["Environment"]</InArgument>
-            </ui:FilterOperationArgument.Column>
-            <ui:FilterOperationArgument.Operand>
-              <InArgument x:TypeArguments="x:String">[in_DrTransactionItem.item("Environment").ToString]</InArgument>
-            </ui:FilterOperationArgument.Operand>
-          </ui:FilterOperationArgument>
-        </scg:List>
-      </ui:FilterDataTable.Filters>
-      <ui:FilterDataTable.SelectColumns>
-        <scg:List x:TypeArguments="InArgument" Capacity="4">
-          <x:Null />
-        </scg:List>
-      </ui:FilterDataTable.SelectColumns>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:FilterDataTable>
-    <ui:LogMessage DisplayName="Log Message orchestrato type" sap:VirtualizedContainerService.HintSize="434,101" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Orchestrator is: &quot;+in_DrTransactionItem.item(&quot;Orchestrator type&quot;).ToString]">
+    <TryCatch DisplayName="Try  Catch P_1_1___OrchestratorAPI_ValidateParameters" sap:VirtualizedContainerService.HintSize="514.6666666666666,1838" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-    </ui:LogMessage>
-    <ui:LogMessage DisplayName="Log Message environment" sap:VirtualizedContainerService.HintSize="434,101" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Environment is: &quot;+in_DrTransactionItem.item(&quot;Environment&quot;).ToString]">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:LogMessage>
-    <If Condition="[out_DtItemParameters.Rows.Count &lt;1]" DisplayName="If item parameters are blank" sap:VirtualizedContainerService.HintSize="434,363" sap2010:WorkflowViewState.IdRef="If_1">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <If.Then>
-        <Throw DisplayName="Throw BRE &lt;1" Exception="[New BusinessRuleException(&quot;The parameters sheet does not have details for &quot;+in_DrTransactionItem.item(&quot;Orchestrator type&quot;).ToString+&quot; orchestrator and &quot;+in_DrTransactionItem.item(&quot;Environment&quot;).ToString+&quot; environment&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_1" />
-      </If.Then>
-    </If>
-    <If Condition="[out_DtItemParameters.Rows.Count &gt;1]" DisplayName="If item parameters have multiple items" sap:VirtualizedContainerService.HintSize="434,363" sap2010:WorkflowViewState.IdRef="If_2">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <If.Then>
-        <Throw DisplayName="Throw BRE &gt;1" Exception="[New BusinessRuleException(&quot;The parameters sheet have multiple ldetails for &quot;+in_DrTransactionItem.item(&quot;Orchestrator type&quot;).ToString+&quot; orchestrator and &quot;+in_DrTransactionItem.item(&quot;Environment&quot;).ToString+&quot; environment&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_2" />
-      </If.Then>
-    </If>
-    <ui:LogMessage DisplayName="Log Message orchestrato URL" sap:VirtualizedContainerService.HintSize="434,101" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Orchestrator URL is: &quot;+out_DtItemParameters.Rows(0).item(&quot;Orchestrator URL&quot;).ToString]">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:LogMessage>
-    <ui:LogMessage DisplayName="Log Message tenant" sap:VirtualizedContainerService.HintSize="434,101" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Tenant is: &quot;+out_DtItemParameters.Rows(0).item(&quot;Orchestrator Tenant name&quot;).ToString]">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:LogMessage>
-    <ui:IfElseIf DisplayName="If Orchestrator URL blank" sap:VirtualizedContainerService.HintSize="434,61" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
-      <ui:IfElseIf.ConditionBlocks>
-        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-          <ui:IfElseIfBlock BlockType="If" Condition="[String.IsNullOrEmpty(out_DtItemParameters.Rows(0).item(&quot;Orchestrator URL&quot;).ToString)]">
-            <ui:IfElseIfBlock.Then>
-              <Throw DisplayName="Throw BRE Orchestrator URL blank" Exception="[New BusinessRuleException(&quot;The field named Orchestrator URL must be populated on the parameters tab&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_3" />
-            </ui:IfElseIfBlock.Then>
-          </ui:IfElseIfBlock>
-        </sc:BindingList>
-      </ui:IfElseIf.ConditionBlocks>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:IfElseIf>
-    <ui:IfElseIf DisplayName="If Orchestrator Tenant name blank" sap:VirtualizedContainerService.HintSize="434,61" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
-      <ui:IfElseIf.ConditionBlocks>
-        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-          <ui:IfElseIfBlock BlockType="If" Condition="[String.IsNullOrEmpty(out_DtItemParameters.Rows(0).item(&quot;Orchestrator Tenant name&quot;).ToString)]">
-            <ui:IfElseIfBlock.Then>
-              <Throw DisplayName="Throw BRE Orchestrator Tenant name" Exception="[New BusinessRuleException(&quot;The field named Orchestrator Tenant must be populated on the parameters tab&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_4" />
-            </ui:IfElseIfBlock.Then>
-          </ui:IfElseIfBlock>
-        </sc:BindingList>
-      </ui:IfElseIf.ConditionBlocks>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:IfElseIf>
-    <ui:IfElseIf DisplayName="If Authentication asset name blank" sap:VirtualizedContainerService.HintSize="434,61" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
-      <ui:IfElseIf.ConditionBlocks>
-        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-          <ui:IfElseIfBlock BlockType="If" Condition="[String.IsNullOrEmpty(out_DtItemParameters.Rows(0).item(&quot;Credentials asset name&quot;).ToString)]">
-            <ui:IfElseIfBlock.Then>
-              <Throw DisplayName="Throw BRE  Authentication asset name" Exception="[New BusinessRuleException(&quot;The field named Credentials asset must be populated on the parameters tab&quot;)]" sap:VirtualizedContainerService.HintSize="334,97" sap2010:WorkflowViewState.IdRef="Throw_5" />
-            </ui:IfElseIfBlock.Then>
-          </ui:IfElseIfBlock>
-        </sc:BindingList>
-      </ui:IfElseIf.ConditionBlocks>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:IfElseIf>
-    <ui:IfElseIf DisplayName="If NOT Orchestrator URL contains https" sap:VirtualizedContainerService.HintSize="434,61" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
-      <ui:IfElseIf.ConditionBlocks>
-        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-          <ui:IfElseIfBlock BlockType="If" Condition="[NOT out_DtItemParameters.Rows(0).item(&quot;Orchestrator URL&quot;).ToString.ToUpper.Contains(&quot;HTTPS&quot;)]">
-            <ui:IfElseIfBlock.Then>
-              <Assign DisplayName="Assign End point http" sap:VirtualizedContainerService.HintSize="262,70" sap2010:WorkflowViewState.IdRef="Assign_1">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:Object">[out_DtItemParameters.Rows(0).item("Orchestrator URL")]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:Object">["https://"+out_DtItemParameters.Rows(0).item("Orchestrator URL").ToString]</InArgument>
-                </Assign.Value>
-              </Assign>
-            </ui:IfElseIfBlock.Then>
-          </ui:IfElseIfBlock>
-        </sc:BindingList>
-      </ui:IfElseIf.ConditionBlocks>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:IfElseIf>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,101" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;--End Validation Parameters on Orch--&quot;]" />
+      <TryCatch.Try>
+        <Sequence sap:VirtualizedContainerService.HintSize="476,1576.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,94.66666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;--Start Validation Parameters on Orch--&quot;]" />
+          <ui:FilterDataTable DataTable="[in_DtParameters]" DisplayName="Filter Data Table parameters" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="434,162.66666666666666" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[out_DtItemParameters]" SelectColumnsMode="Keep">
+            <ui:FilterDataTable.Filters>
+              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                  <ui:FilterOperationArgument.Column>
+                    <InArgument x:TypeArguments="x:String">["Orchestrator type"]</InArgument>
+                  </ui:FilterOperationArgument.Column>
+                  <ui:FilterOperationArgument.Operand>
+                    <InArgument x:TypeArguments="x:String">[in_DrTransactionItem.item("Orchestrator type").ToString]</InArgument>
+                  </ui:FilterOperationArgument.Operand>
+                </ui:FilterOperationArgument>
+                <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                  <ui:FilterOperationArgument.Column>
+                    <InArgument x:TypeArguments="x:String">["Environment"]</InArgument>
+                  </ui:FilterOperationArgument.Column>
+                  <ui:FilterOperationArgument.Operand>
+                    <InArgument x:TypeArguments="x:String">[in_DrTransactionItem.item("Environment").ToString]</InArgument>
+                  </ui:FilterOperationArgument.Operand>
+                </ui:FilterOperationArgument>
+              </scg:List>
+            </ui:FilterDataTable.Filters>
+            <ui:FilterDataTable.SelectColumns>
+              <scg:List x:TypeArguments="InArgument" Capacity="4">
+                <x:Null />
+              </scg:List>
+            </ui:FilterDataTable.SelectColumns>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:FilterDataTable>
+          <ui:LogMessage DisplayName="Log Message orchestrato type" sap:VirtualizedContainerService.HintSize="434,94.66666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Orchestrator is: &quot;+in_DrTransactionItem.item(&quot;Orchestrator type&quot;).ToString]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:LogMessage>
+          <ui:LogMessage DisplayName="Log Message environment" sap:VirtualizedContainerService.HintSize="434,52.666666666666664" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Environment is: &quot;+in_DrTransactionItem.item(&quot;Environment&quot;).ToString]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:LogMessage>
+          <If Condition="[out_DtItemParameters.Rows.Count &lt;1]" DisplayName="If item parameters are blank" sap:VirtualizedContainerService.HintSize="434,52.666666666666664" sap2010:WorkflowViewState.IdRef="If_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Throw DisplayName="Throw BRE &lt;1" Exception="[New BusinessRuleException(&quot;The parameters sheet does not have details for &quot;+in_DrTransactionItem.item(&quot;Orchestrator type&quot;).ToString+&quot; orchestrator and &quot;+in_DrTransactionItem.item(&quot;Environment&quot;).ToString+&quot; environment&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+            </If.Then>
+          </If>
+          <If Condition="[out_DtItemParameters.Rows.Count &gt;1]" DisplayName="If item parameters have multiple items" sap:VirtualizedContainerService.HintSize="434,52.666666666666664" sap2010:WorkflowViewState.IdRef="If_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Throw DisplayName="Throw BRE &gt;1" Exception="[New BusinessRuleException(&quot;The parameters sheet have multiple ldetails for &quot;+in_DrTransactionItem.item(&quot;Orchestrator type&quot;).ToString+&quot; orchestrator and &quot;+in_DrTransactionItem.item(&quot;Environment&quot;).ToString+&quot; environment&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
+            </If.Then>
+          </If>
+          <ui:LogMessage DisplayName="Log Message orchestrato URL" sap:VirtualizedContainerService.HintSize="434,94.66666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Orchestrator URL is: &quot;+out_DtItemParameters.Rows(0).item(&quot;Orchestrator URL&quot;).ToString]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:LogMessage>
+          <ui:LogMessage DisplayName="Log Message tenant" sap:VirtualizedContainerService.HintSize="434,94.66666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Tenant is: &quot;+out_DtItemParameters.Rows(0).item(&quot;Orchestrator Tenant name&quot;).ToString]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:LogMessage>
+          <ui:IfElseIf DisplayName="If Orchestrator URL blank" sap:VirtualizedContainerService.HintSize="434,52.666666666666664" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+            <ui:IfElseIf.ConditionBlocks>
+              <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                <ui:IfElseIfBlock BlockType="If" Condition="[String.IsNullOrEmpty(out_DtItemParameters.Rows(0).item(&quot;Orchestrator URL&quot;).ToString)]">
+                  <ui:IfElseIfBlock.Then>
+                    <Throw DisplayName="Throw BRE Orchestrator URL blank" Exception="[New BusinessRuleException(&quot;The field named Orchestrator URL must be populated on the parameters tab&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_3" />
+                  </ui:IfElseIfBlock.Then>
+                </ui:IfElseIfBlock>
+              </sc:BindingList>
+            </ui:IfElseIf.ConditionBlocks>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:IfElseIf>
+          <ui:IfElseIf DisplayName="If Orchestrator Tenant name blank" sap:VirtualizedContainerService.HintSize="434,52.666666666666664" sap2010:WorkflowViewState.IdRef="IfElseIf_2">
+            <ui:IfElseIf.ConditionBlocks>
+              <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                <ui:IfElseIfBlock BlockType="If" Condition="[String.IsNullOrEmpty(out_DtItemParameters.Rows(0).item(&quot;Orchestrator Tenant name&quot;).ToString)]">
+                  <ui:IfElseIfBlock.Then>
+                    <Throw DisplayName="Throw BRE Orchestrator Tenant name" Exception="[New BusinessRuleException(&quot;The field named Orchestrator Tenant must be populated on the parameters tab&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_4" />
+                  </ui:IfElseIfBlock.Then>
+                </ui:IfElseIfBlock>
+              </sc:BindingList>
+            </ui:IfElseIf.ConditionBlocks>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:IfElseIf>
+          <ui:IfElseIf DisplayName="If Authentication asset name blank" sap:VirtualizedContainerService.HintSize="434,52.666666666666664" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
+            <ui:IfElseIf.ConditionBlocks>
+              <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                <ui:IfElseIfBlock BlockType="If" Condition="[String.IsNullOrEmpty(out_DtItemParameters.Rows(0).item(&quot;Credentials asset name&quot;).ToString)]">
+                  <ui:IfElseIfBlock.Then>
+                    <Throw DisplayName="Throw BRE  Authentication asset name" Exception="[New BusinessRuleException(&quot;The field named Credentials asset must be populated on the parameters tab&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_5" />
+                  </ui:IfElseIfBlock.Then>
+                </ui:IfElseIfBlock>
+              </sc:BindingList>
+            </ui:IfElseIf.ConditionBlocks>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:IfElseIf>
+          <ui:IfElseIf DisplayName="If NOT Orchestrator URL contains https" sap:VirtualizedContainerService.HintSize="434,52.666666666666664" sap2010:WorkflowViewState.IdRef="IfElseIf_4">
+            <ui:IfElseIf.ConditionBlocks>
+              <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                <ui:IfElseIfBlock BlockType="If" Condition="[NOT out_DtItemParameters.Rows(0).item(&quot;Orchestrator URL&quot;).ToString.ToUpper.Contains(&quot;HTTPS&quot;)]">
+                  <ui:IfElseIfBlock.Then>
+                    <Assign DisplayName="Assign End point http" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[out_DtItemParameters.Rows(0).item("Orchestrator URL")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">["https://"+out_DtItemParameters.Rows(0).item("Orchestrator URL").ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </ui:IfElseIfBlock.Then>
+                </ui:IfElseIfBlock>
+              </sc:BindingList>
+            </ui:IfElseIf.ConditionBlocks>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:IfElseIf>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,94.66666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;--End Validation Parameters on Orch--&quot;]" />
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="480.6666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Sequence exception" sap:VirtualizedContainerService.HintSize="376,248.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message exception" sap:VirtualizedContainerService.HintSize="334,94.66666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Exception is &quot;+exception.Message]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:LogMessage>
+              <Throw DisplayName="Throw exception" Exception="[New Exception(&quot;The robot was not able to validate the paramaters&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_6" />
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+        <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="480.6666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+            </ActivityAction.Argument>
+            <Rethrow DisplayName="Rethrow BRE" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
   </Sequence>
 </Activity>
